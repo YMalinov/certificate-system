@@ -1,0 +1,47 @@
+﻿@model WebApplicationCertificateUserSystem.Models.PublicCourseModel
+
+@{
+    ViewBag.Title = Model.Title +  " Details";
+}
+
+<h2>@Html.DisplayFor(model => model.Title)</h2>
+
+<fieldset>
+    <legend>Course</legend>
+    <dl>
+        <dt>
+            Lecturer Name
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LecturerName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt>
+            Enrolled?
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Enrolled)
+        </dd>
+
+        <dt>
+            Enrolled Count
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EnrolledCount)
+        </dd>
+    </dl>
+</fieldset>
+<p>
+    @Html.ActionLink("Back to List", "Index")
+</p>

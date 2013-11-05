@@ -1,0 +1,43 @@
+﻿@model IEnumerable<WebApplicationCertificateUserSystem.Models.CertificateModel>
+@{
+    ViewBag.Title = "Index";
+}
+
+
+<div class="row-fluid">
+    <div class="span4"></div>
+    <div class="span4"><h2>All certificates</h2></div>
+</div>
+@foreach (var certificate in Model)
+{
+    <div class="row-fluid">
+        <div class="span4"></div>
+        <div class="span4">
+            <div class="alert alert-info">
+                <strong>@certificate.Title</strong>
+                <span>Minimal mark: @certificate.MinimalMark</span>
+                @Ajax.ActionLink("Details", "Details", new { id = certificate.Id },
+                new AjaxOptions { HttpMethod = "GET", InsertionMode = InsertionMode.Replace, UpdateTargetId = "details" },
+                null)
+                @if (User.Identity.IsAuthenticated && certificate.ShowApply)
+                {
+                    @Ajax.ActionLink("Apply", "Apply", new { id = certificate.Id },
+                new AjaxOptions { HttpMethod = "GET", InsertionMode = InsertionMode.Replace, UpdateTargetId = "details" },
+                null)
+                }
+                else if (User.Identity.IsAuthenticated && !certificate.ShowApply)
+	            {
+		            @Html.ActionLink("View certificate","ViewCertificate", new { id = certificate.Id })
+	            }
+            </div>
+        </div>
+    </div>
+}
+<div class="row-fluid">
+    <div class="span4"></div>
+    <div class="span4">
+        <div id="details">
+        </div>
+    </div>
+</div>
+

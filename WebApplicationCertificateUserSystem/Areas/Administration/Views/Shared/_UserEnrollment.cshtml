@@ -1,0 +1,42 @@
+﻿@using WebApplicationCertificateUserSystem.Areas.Administration.Models
+@model EnrollmentModel
+
+@{
+    var users = Model.Users;
+}
+
+@if (users.Count > 0)
+{
+using (Html.BeginForm("EnrollUser", "CoursesAdmin", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset class="form-horizontal">
+        <legend>Enrollment</legend>
+        @Html.Hidden("CourseId", Model.CourseId)
+        @Html.Hidden("Users", Model.Users)
+        @Html.Kendo().DropDownList().Name("Id").BindTo(users).DataTextField("Username").DataValueField("Id")
+        <label for="StartDate">Start Date:</label>
+        @Html.Kendo().DatePicker().Name("StartDate").Value(Model.StartDate)
+        <label for="EndDate">End Date:</label>
+        @Html.Kendo().DatePicker().Name("EndDate").Value(Model.EndDate)
+
+        <div class="form-actions no-color">
+            @if (users.Count > 0)
+            {
+                <input type="submit" value="Enroll" class="btn" />
+            }
+            else
+            {
+                <input type="submit" value="Enroll" class="btn" disabled="disabled" />
+            }
+        </div>
+    </fieldset>
+}
+}
+else
+{
+     @Html.ValidationSummary(false)
+    <div class="alert alert-error">No eligible users.</div>
+}

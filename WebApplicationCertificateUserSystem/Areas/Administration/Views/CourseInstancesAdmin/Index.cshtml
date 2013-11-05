@@ -1,0 +1,53 @@
+﻿@using WebApplicationCertificateUserSystem.Areas.Administration.Models
+<h2>Course Instances Administration</h2>
+
+@(Html.Kendo().Grid<CourseInstanceGridViewModel>().Name("CoursesGrid").Columns(col =>
+    {
+        col.Bound(c => c.Username);
+        col.Bound(c => c.CourseName);
+        col.Bound(c => c.Mark);
+        //col.Bound(c => c.Certificates).ClientTemplate("#=  generateTemplate(Certificates)  #").EditorTemplateName("EmptyTemplate");
+        col.Bound(c => c.IsActive);
+        //col.Template(c => Html.ActionLink(c.StartDate.ToString(), "Index", "Home"));
+        col.Bound(c => c.StartDate).Format("{0:dd/MM/yyyy}").EditorTemplateName("StartDataTemplate");
+        //col.Template(c => { Html.Kendo().DatePicker().Name("StartDatePicker").Value(c.StartDate); }).ClientTemplate("");
+        col.Bound(c => c.EndDate).Format("{0:dd/MM/yyyy}").EditorTemplateName("EndDataTemplate");
+        col.Command(command => { command.Edit(); }).Width(172);
+        //col.Template(c => c.Id);
+        //col.Template(c => @Ajax.ActionLink("AddUsers", "GetUserList", "CoursesAdmin", new { },
+        //new AjaxOptions() { InsertionMode = InsertionMode.Replace, UpdateTargetId = "update-div" }));
+    })
+        .Pageable()
+        .Sortable()
+        .DataSource(dataSource => dataSource
+            .Ajax()
+            .PageSize(10)
+            .Model(model => model.Id(p => p.Id))
+            .Read(read => read.Action("Read", "CourseInstancesAdmin"))
+            .Update(update => update.Action("Update", "CourseInstancesAdmin"))
+        //.Events(events => {events.RequestStart("showColumn");})
+        )
+        .Events(events =>
+        {
+            events.Edit("hideColumn");
+            events.Cancel("showColumn");
+            events.Save("showColumn");
+        })
+)
+
+<script>
+    function hideColumn() {
+        // $('#CoursesGrid div.k-grid-header-wrap th:nth-child(4), #grid div.k-grid-content td:nth-child(4)').toggle();
+        $('#CoursesGrid table thead tr th:nth-child(0)').hide();
+        $('#CoursesGrid table thead tr th:nth-child(1)').hide();
+        $('#CoursesGrid table tbody tr td:nth-child(0)').hide();
+        $('#CoursesGrid table tbody tr td:nth-child(1)').hide();
+    }
+
+    function showColumn() {
+        $('#CoursesGrid table thead tr th:nth-child(0)').show();
+        $('#CoursesGrid table thead tr th:nth-child(1)').show();
+        $('#CoursesGrid table tbody tr td:nth-child(0)').show();
+        $('#CoursesGrid table tbody tr td:nth-child(1)').show();
+    }
+</script>

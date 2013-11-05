@@ -1,0 +1,20 @@
+﻿@model WebApplicationCertificateUserSystem.Models.CertificateApplicationModel
+
+@if (Model.IsIssued)
+{
+    <div class="alert alert-success">
+        <p>
+            Congratulations you earned @Model.Title certificate!
+        </p>
+    </div>
+}
+else
+{
+    <div class="alert alert-error">
+        <p>
+            Sorry your application for <strong>@Model.Title</strong> certificate
+            has been rejected.
+        </p>
+    </div>
+}
+

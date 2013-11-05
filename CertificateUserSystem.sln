@@ -1,0 +1,49 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.20827.3
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CertificateUserSystem.Models", "CertificateUserSystem.Models\CertificateUserSystem.Models.csproj", "{47C4EAE3-D39E-4934-8B75-EDD26252A4FD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CertificateUserSystem.Data", "CertificateUserSystem.Data\CertificateUserSystem.Data.csproj", "{FA05865D-BA15-43CC-BC2B-6DE74868148A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApplicationCertificateUserSystem", "WebApplicationCertificateUserSystem\WebApplicationCertificateUserSystem.csproj", "{9F52BE0C-EB96-44D9-A3DD-DE75F6CB7F77}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 4
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://tfs.codeplex.com/tfs/tfs22
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = CertificateUserSystem.Data\\CertificateUserSystem.Data.csproj
+		SccProjectName1 = CertificateUserSystem.Data
+		SccLocalPath1 = CertificateUserSystem.Data
+		SccProjectUniqueName2 = CertificateUserSystem.Models\\CertificateUserSystem.Models.csproj
+		SccProjectName2 = CertificateUserSystem.Models
+		SccLocalPath2 = CertificateUserSystem.Models
+		SccProjectUniqueName3 = WebApplicationCertificateUserSystem\\WebApplicationCertificateUserSystem.csproj
+		SccProjectName3 = WebApplicationCertificateUserSystem
+		SccLocalPath3 = WebApplicationCertificateUserSystem
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{47C4EAE3-D39E-4934-8B75-EDD26252A4FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{47C4EAE3-D39E-4934-8B75-EDD26252A4FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{47C4EAE3-D39E-4934-8B75-EDD26252A4FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{47C4EAE3-D39E-4934-8B75-EDD26252A4FD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FA05865D-BA15-43CC-BC2B-6DE74868148A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FA05865D-BA15-43CC-BC2B-6DE74868148A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FA05865D-BA15-43CC-BC2B-6DE74868148A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FA05865D-BA15-43CC-BC2B-6DE74868148A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9F52BE0C-EB96-44D9-A3DD-DE75F6CB7F77}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9F52BE0C-EB96-44D9-A3DD-DE75F6CB7F77}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9F52BE0C-EB96-44D9-A3DD-DE75F6CB7F77}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9F52BE0C-EB96-44D9-A3DD-DE75F6CB7F77}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

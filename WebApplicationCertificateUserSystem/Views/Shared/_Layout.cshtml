@@ -1,0 +1,62 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Team Manticore</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/ajax")
+    @Scripts.Render("~/bundles/jquery")
+    @Styles.Render("~/Content/kendo")
+    @Scripts.Render("~/bundles/kendo")
+
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="navbar-inner">
+            <div class="container">
+                <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <div class="nav-collapse collapse">
+                    <ul class="nav">
+                        <li>@Html.ActionLink("Courses", "Index", "Courses", new { area = "" }, new { })</li>
+                        <li>@Html.ActionLink("Certificates", "Index", "Certificates", new { area = "" }, new { })</li>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <li>@Html.ActionLink("Profile", "ShowProfile", "Profile", new { area = "" }, new { })</li>
+                        }
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Administration <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    <li>@Html.ActionLink("UserAdministration", "Index", "UsersAdmin", new { area = "Administration" }, new { })</li>
+                                    <li>@Html.ActionLink("CoursesAdministration", "Index", "CoursesAdmin", new { area = "Administration" }, new { })</li>
+                                    <li>@Html.ActionLink("CourseInstancesAdministration", "Index", "CourseInstancesAdmin", new { area = "Administration" }, new { })</li>
+                                    <li>@Html.ActionLink("CertificatesAdministration", "Index", "CertificatesAdmin", new { area = "Administration" }, new { })</li>
+                                </ul>
+                            </li>
+                        }
+                        <!--<li>@Html.ActionLink("About", "About", "Home", new { area = "" }, new { })</li>
+                        <li>@Html.ActionLink("Contact", "Contact", "Home", new { area = "" }, new { })</li>-->
+                    </ul> @Html.Partial("_LoginPartial")
+                </div>
+                </div>
+            </div>
+        </div>
+    <div class="container">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - Team Manticore</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

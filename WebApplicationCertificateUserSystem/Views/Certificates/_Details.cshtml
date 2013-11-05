@@ -1,0 +1,10 @@
+﻿@model WebApplicationCertificateUserSystem.Models.CertificateDetailsModel
+
+<span>Courses needed for <strong>@Model.Title</strong> certificate</span>
+@foreach (var course in Model.Courses)
+{
+    <div>
+        <span>@course.Title</span>
+        <p>@course.Description</p>
+    </div>
+}

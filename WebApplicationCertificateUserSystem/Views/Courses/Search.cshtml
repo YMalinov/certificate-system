@@ -1,0 +1,22 @@
+﻿@model IEnumerable<WebApplicationCertificateUserSystem.Models.PublicCourseModel>
+<h2>Search result:</h2>
+<ul>
+    @{
+        foreach (var course in Model)
+        {
+            <li>
+                @Ajax.ActionLink(course.Title, "ShowCourseDetails", new { bookName = course.Title,id=course.Id }, new AjaxOptions
+                        {
+                            InsertionMode = InsertionMode.Replace,
+                            UpdateTargetId = "courses-content"
+                        })
+                Lecturer: @course.LecturerName 
+            </li>
+        }
+    }
+
+</ul>
+<div id="courses-content">
+
+</div>
+

@@ -1,0 +1,96 @@
+﻿@using WebApplicationCertificateUserSystem.Areas.Administration.Models
+@using System.Text
+
+@model EnrollmentModel
+
+@if ((Model != null ) && (Model.Message != null))
+{
+    <div id="successData" class="alert alert-success">@Model.Message</div>
+    <script>
+        $("#successData").fadeOut(4000, function(){});
+    </script>
+}
+
+@{var errors = new StringBuilder();
+  bool isAdded = false;}
+
+@foreach (ModelState modelState in ViewData.ModelState.Values) {
+    foreach (ModelError error in modelState.Errors) {
+        errors.AppendLine(error.ErrorMessage);
+        isAdded = true;
+    }  
+}
+
+@if ((errors.Length > 2) && isAdded)
+{
+    <div class="alert alert-error" id="errorData">@errors</div>
+     <script>
+         $("#errorData").fadeOut(4000, function () { });
+    </script>
+}
+<h2>Courses Administration</h2>
+
+@(Html.Kendo().Grid<CourseGridViewModel>().Name("CoursesGrid").Columns(col =>
+    {
+        col.Bound(c => c.Title);
+        col.Bound(c => c.Lecturer);
+        col.Bound(c => c.Description);
+        //col.Bound(c => c.Certificates).ClientTemplate("#=  generateTemplate(Certificates)  #").EditorTemplateName("EmptyTemplate");
+        col.Bound(c => c.IsActive);
+        col.Bound(c => c.Id).Title("Enroll").EditorTemplateName("EmptyTemplate").ClientTemplate(
+            //@Ajax.ActionLink("AddUsers", "GetUserList", "CoursesAdmin", new { },
+            //new AjaxOptions() { InsertionMode = InsertionMode.Replace, UpdateTargetId = "update-div" }).ToHtmlString()
+            "<a data-ajax='true' data-ajax-mode='replace' data-ajax-update='\\#update-div' href='" + Url.Action("GetUserList", "CoursesAdmin", new { id="#:Id#" }) + "'>Enroll User</a>"
+   );
+        col.Command(command => { command.Edit(); }).Width(172);
+        //col.Template(c => c.Id);
+        //col.Template(c => @Ajax.ActionLink("AddUsers", "GetUserList", "CoursesAdmin", new { },
+        //new AjaxOptions() { InsertionMode = InsertionMode.Replace, UpdateTargetId = "update-div" }));
+    })
+        .ToolBar(toolbar => toolbar.Create())
+        .Pageable()
+        .Sortable()
+        .DataSource(dataSource => dataSource
+            .Ajax()
+            .PageSize(10)
+            .Model(model => model.Id(p => p.Id))
+            .Read(read => read.Action("Read", "CoursesAdmin"))
+            .Create(create => create.Action("Create", "CoursesAdmin"))
+                .Update(update => update.Action("Update", "CoursesAdmin"))
+                //.Events(events => {events.RequestStart("showColumn");})
+        )
+        .Events(events =>{ 
+            events.Edit("hideColumn");
+            events.Cancel("showColumn");
+            events.Save("showColumn");
+        })
+)
+
+<div id="update-div"></div>
+
+<script>
+    function generateTemplate(Certificates) {
+        var template = "<ul>";
+        if (Certificates) {
+            for (var i = 0; i < Certificates.length; i++) {
+                template = template + "<li>" + Certificates[i] + "</li>";
+            }
+        }
+        return template + "</ul>";
+    }
+
+    function hideColumn() {
+       // $('#CoursesGrid div.k-grid-header-wrap th:nth-child(4), #grid div.k-grid-content td:nth-child(4)').toggle();
+      // $('#CoursesGrid table thead tr th:nth-child(3)').hide();
+       $('#CoursesGrid table thead tr th:nth-child(5)').hide();
+       //$('#CoursesGrid table tbody tr td:nth-child(3)').hide();
+       $('#CoursesGrid table tbody tr td:nth-child(5)').hide();
+    }
+
+    function showColumn() {
+       // $('#CoursesGrid table thead tr th:nth-child(3)').show();
+        $('#CoursesGrid table thead tr th:nth-child(5)').show();
+       // $('#CoursesGrid table tbody tr td:nth-child(3)').show();
+        $('#CoursesGrid table tbody tr td:nth-child(5)').show();
+    }
+</script>

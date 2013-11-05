@@ -1,0 +1,32 @@
+﻿@model WebApplicationCertificateUserSystem.Models.IssuedCertificateModel
+
+@{
+    ViewBag.Title = "ViewCertificate";
+}
+<div style="width:800px; height:700px; padding:20px; text-align:center; border: 10px solid #787878">
+    <div style="width:750px; height:650px; padding:20px; text-align:center; border: 5px solid #787878">
+        <span style="font-size:50px; font-weight:bold">Certificate of Completion</span>
+        <br><br>
+        <span style="font-size:25px"><i>This is to certify that</i></span>
+        <br><br>
+        <span style="font-size:30px"><b>@Model.OwnerName</b></span><br /><br />
+        <span style="font-size:25px"><i>has earned </i></span> <br /><br />
+        <span style="font-size:30px">@Model.Title certificate</span> <br /><br />
+        <span style="font-size:20px">with score of <b>@Model.Mark</b></span> <br /><br /><br /><br />
+        <span style="font-size:20px">Courses completed:</span>
+        <ul>
+            @foreach (var course in Model.Courses)
+            {
+                <li>
+                    <span style="font-size:20px">@course.Title</span>
+                </li>
+            }
+        </ul><br /><br /><br />
+        <span style="font-size:25px"><i>dated</i></span>
+        <span style="font-size:30px">&nbsp;@Model.IssueDate</span><br />
+        <span style="font-size:25px">Signature:</span>
+        <span><img src="http://blog.fuc.fr/wp-content/uploads/2012/07/signature-a.jpg" width="100" height="100"></span>
+        <div><img src="http://www.jchq.net/certkey/images/certfied.gif" width="150" height="150" /></div>
+    </div>
+</div>
+

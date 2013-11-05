@@ -1,0 +1,49 @@
+﻿@model  IEnumerable<WebApplicationCertificateUserSystem.Areas.Administration.Models.UserViewModel>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>User Administration</h2>
+
+@if (ViewBag.ErrorMassage!=null)
+	{
+        foreach (var error in ViewBag.ErrorMassage)
+        {
+            <div class="alert alert-error" id="error-massage">
+                @error <br />
+                <script>
+                    $("#error-massage").fadeOut(4000, function () { });
+                </script>
+            </div>
+        }
+	}
+
+
+@(Html.Kendo().Grid(Model)
+    .Name("Grid")
+    .Columns(columns =>
+    {
+        columns.Bound(u => u.FirstName).Sortable(true);
+        columns.Bound(u => u.LastName).Sortable(true);
+        columns.Bound(u => u.Role).Sortable(true);
+        columns.Bound(u => u.IsBann).Sortable(true);
+        columns.Command(command => { command.Edit(); command.Destroy(); }).Width(190);
+    })
+    .Editable(editable => editable.Mode(GridEditMode.PopUp))
+    .Groupable()
+    .Pageable()
+    .Sortable()
+    .Scrollable()
+    .Filterable()
+   .DataSource(dataSource => dataSource
+            .Ajax()
+            .Model(model =>
+                {
+                    model.Id(u => u.Id);
+                })
+            .Read(read => read.Action("Read", "UsersAdmin"))
+                .Update(update => update.Action("EditingPopup_Update", "UsersAdmin"))
+                .Destroy(update => update.Action("EditingPopup_Destroy", "UsersAdmin"))
+
+        )
+)

@@ -1,0 +1,50 @@
+﻿@model CertificateUserSystem.Models.ApplicationUser
+
+<div class="row">
+    <div class="span3">
+        <div id="user-info" class="">
+            <span><b>First name:</b> @Model.FirstName</span><br />
+            <span><b>Last name:</b> @Model.LastName</span><br />
+            <span><b>Nickname:</b> @Model.UserName</span><br />
+        </div>
+    </div>
+
+    <div class="span4">
+
+        <img width="100" height="100" src="@Model.AvatarPath" alt="avatar" class="img-polaroid" /><br />
+
+        <form method="post" action='@Url.Action("Submit")' style="width:45%">
+            <div class="demo-section">
+                @(Html.Kendo().Upload()
+            .Name("files")
+            .Multiple(false)
+                )
+                <p>
+                    <input type="submit" value="Change Picture" class="k-button" />
+                </p>
+            </div>
+        </form>
+    </div>
+
+</div>
+<div class="row">
+    <div class="span3">
+        <div>My Courses</div>
+        <ul>
+            @foreach (var course in @Model.Courses)
+{
+    <li>@Html.ActionLink(@course.Course.Title, "Details", "Courses", new { id = course.Id }, null)</li>
+
+}
+        </ul>
+    </div>
+    <div class="span4">
+        <div>My Certificates</div>
+        <ul>
+            @foreach (var certicate in @Model.Certificates)
+{
+    <li>@Html.ActionLink(@certicate.Title, "ViewCertificate", "Certificates", new { id = certicate.Id }, null)</li>
+}
+        </ul>
+    </div>
+</div>

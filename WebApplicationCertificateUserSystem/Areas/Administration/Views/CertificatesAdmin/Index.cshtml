@@ -1,0 +1,36 @@
+﻿@model IEnumerable<WebApplicationCertificateUserSystem.Areas.Administration.Models.CertificateViewModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Certificates Administration</h2>
+
+@(Html.Kendo().Grid(Model)
+    .Name("Grid")
+    .Columns(columns =>
+    {
+        columns.Bound(u => u.Title).Sortable(true);
+        columns.Bound(u => u.MinimalMark).Sortable(true);
+        columns.Bound(u => u.Courses).Sortable(true);
+        columns.Command(command => { command.Edit(); command.Destroy();}).Width(190);
+    })
+    .Editable(editable => editable.Mode(GridEditMode.PopUp))
+    .Groupable()
+    .Pageable()
+    .Sortable()
+    .Scrollable()
+    .Filterable()
+    .ToolBar(update => update.Create())
+   .DataSource(dataSource => dataSource
+            .Ajax()
+            .PageSize(5)
+            .Model(model =>
+                {
+                    model.Id(u => u.Id);
+                })
+            .Read(read => read.Action("Read", "CertificatesAdmin"))
+                    .Update(update => update.Action("Update", "CertificatesAdmin"))
+                        .Destroy(destroy => destroy.Action("Destroy", "CertificatesAdmin"))
+                        .Create(create => create.Action("Create", "CertificatesAdmin"))
+))
